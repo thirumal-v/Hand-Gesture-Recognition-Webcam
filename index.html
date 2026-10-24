@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#101014" />
+    <meta
+      name="description"
+      content="Detect hand gestures using a webcam."
+    />
+    <title>Hand Gesture Recognition</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="module" src="./app.js"></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="Hand Gesture Recognition home">
+          <span class="brand-mark" aria-hidden="true">✳</span>
+          <span>Hand Gesture Recognition</span>
+        </a>
+        <div class="topbar-right">
+          <span class="live-badge"><span class="live-dot"></span> YOUR CAMERA STAYS YOURS</span>
+          <a class="github-link" href="#gesture-guide">How it works <span aria-hidden="true">↗</span></a>
+        </div>
+      </header>
+
+      <main>
+        <section class="intro">
+          <div class="eyebrow"><span class="eyebrow-line"></span> A LITTLE MAGIC, RIGHT AT YOUR DESK</div>
+          <h1>Hand Gesture<br /><span>Recognition</span></h1>
+          <p class="intro-copy">
+            Detect hand gestures using a webcam.
+          </p>
+          <div class="intro-note"><span aria-hidden="true">✦</span> Try a gesture. Make someone’s day.</div>
+        </section>
+
+        <section class="studio-layout" aria-label="Hand gesture studio">
+          <div class="camera-card">
+            <div class="camera-topline">
+              <div class="camera-label"><span class="camera-label-icon">◉</span> LIVE STUDIO</div>
+              <div class="camera-status" id="camera-status">
+                <span class="status-dot"></span><span id="status-text">CAMERA OFF</span>
+              </div>
+            </div>
+
+            <div class="camera-stage" id="camera-stage">
+              <video id="camera-video" autoplay muted playsinline aria-label="Live camera preview"></video>
+              <canvas id="landmark-canvas" aria-hidden="true"></canvas>
+              <div class="camera-placeholder" id="camera-placeholder">
+                <div class="placeholder-orbit orbit-one"></div>
+                <div class="placeholder-orbit orbit-two"></div>
+                <div class="placeholder-hand" aria-hidden="true">✋</div>
+                <span class="placeholder-caption">YOUR STAGE IS WAITING</span>
+                <span class="placeholder-subcaption">Your camera preview will appear here</span>
+              </div>
+
+              <div class="detection-pill" id="detection-pill" aria-live="polite" hidden>
+                <span class="detection-sparkle">✦</span>
+                <span class="detected-emoji" id="detected-emoji">👍</span>
+                <span class="detection-divider"></span>
+                <span class="detected-label" id="detected-label">Like</span>
+              </div>
+
+              <div class="camera-hint" id="camera-hint">
+                <span>✋</span> Hold a gesture in view
+              </div>
+            </div>
+
+            <div class="camera-controls">
+              <div class="camera-tip"><span class="tip-icon">✧</span><span id="camera-message">Good lighting makes the magic happen.</span></div>
+              <button class="camera-button" id="camera-button" type="button">
+                <span class="button-icon" aria-hidden="true">◉</span>
+                <span id="button-label">Start camera</span>
+                <span class="button-arrow" aria-hidden="true">↗</span>
+              </button>
+            </div>
+
+            <section class="session-panel" aria-label="Gesture session">
+              <div class="session-heading">
+                <div>
+                  <div class="section-kicker">SESSION INSIGHTS</div>
+                  <h2 class="session-title">Your session</h2>
+                </div>
+                <label class="landmark-toggle">
+                  <input id="landmark-toggle" type="checkbox" checked />
+                  <span>Show landmarks</span>
+                </label>
+              </div>
+
+              <div class="session-stats" aria-live="polite">
+                <div class="stat-card">
+                  <span class="stat-label">DURATION</span>
+                  <strong class="stat-value" id="session-duration">00:00</strong>
+                </div>
+                <div class="stat-card">
+                  <span class="stat-label">GESTURES</span>
+                  <strong class="stat-value" id="gesture-count">0</strong>
+                </div>
+                <div class="stat-card">
+                  <span class="stat-label">UNIQUE</span>
+                  <strong class="stat-value" id="unique-count">0</strong>
+                </div>
+              </div>
+
+              <div class="history-heading">
+                <span class="history-title">Recent activity</span>
+                <div class="history-actions">
+                  <button class="text-button" id="export-history" type="button" disabled>Export CSV</button>
+                  <button class="text-button" id="reset-session" type="button">Reset</button>
+                </div>
+              </div>
+              <ol class="gesture-history" id="gesture-history" aria-live="polite">
+                <li class="history-empty">Detected gestures will appear here.</li>
+              </ol>
+            </section>
+          </div>
+
+          <aside class="guide-card" id="gesture-guide">
+            <div class="guide-heading">
+              <div>
+                <div class="section-kicker">THE GESTURE GUIDE</div>
+                <h2>Say it with<br />your hands.</h2>
+              </div>
+              <span class="guide-sparkle" aria-hidden="true">✳</span>
+            </div>
+            <p class="guide-copy">Explore <strong id="gesture-total">30</strong> one-hand signs.</p>
+            <div class="gesture-list" id="gesture-list" aria-label="Supported gestures"></div>
+            <div class="guide-footnote"><span class="footnote-star">✳</span> Works best with one hand in frame</div>
+          </aside>
+        </section>
+
+        <section class="bottom-note" aria-label="Privacy and recognition information">
+          <div class="note-item"><span class="note-icon">⌁</span><span><strong>Just for fun.</strong> Made for smiles, not serious stuff.</span></div>
+          <span class="note-divider"></span>
+          <div class="note-item"><span class="note-icon">♡</span><span><strong>Private by design.</strong> Your video never leaves your device.</span></div>
+          <span class="note-divider"></span>
+          <div class="note-item note-powered"><span>POWERED BY</span><strong>MediaPipe</strong><span class="powered-star">✳</span></div>
+        </section>
+      </main>
+
+      <footer class="footer"><span>HAND GESTURE RECOGNITION</span><span>MADE TO MAKE YOU SMILE <span class="footer-heart">♥</span></span></footer>
+    </div>
+    <div class="toast" id="toast" role="alert" hidden></div>
+  </body>
+</html>
